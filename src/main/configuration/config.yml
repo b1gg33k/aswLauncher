@@ -9,11 +9,11 @@ servers:
     motd: '&1Just another BungeeCord - Forced Host'
     address: ebony:25605
     restricted: false
-  old-world:
-    motd: Ye old worlde
-    address: ebony:25565
-    restricted: false
-    instanceId: i-099e088cf4a0b5b7d
+#  old-world:
+#    motd: Ye old worlde
+#    address: ebony:25565
+#    restricted: false
+#    instanceId: i-099e088cf4a0b5b7d
 timeout: 30000
 player_limit: -1
 aws:

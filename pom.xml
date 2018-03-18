@@ -6,7 +6,7 @@
 
     <groupId>com.b1gg33k.bungee</groupId>
     <artifactId>awsLauncher</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.2-SNAPSHOT</version>
 
     <properties>
         <bungee.project.parent>/Users/dale/code/BungeeCord/</bungee.project.parent>
@@ -51,14 +51,16 @@
                     <!--</execution>-->
                 <!--</executions>-->
             <!--</plugin>-->
+            <!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.3.1</version>
                 <configuration>
-                    <outputDirectory>./target/plugins/</outputDirectory>
+                    <outputDirectory>${project.build.directory}/plugins/</outputDirectory>
                 </configuration>
             </plugin>
+            -->
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <executions>
@@ -73,9 +75,15 @@
                             <overwrite>true</overwrite>
                             <resources>
                                 <resource>
-                                    <directory>${bungee.project.parent}/module/</directory>
+                                    <directory>${bungee.project.parent}/module/cmd-server/target/</directory>
                                     <includes>
-                                        <include>**/target/cmd*.jar</include>
+                                        <include>cmd*.jar</include>
+                                    </includes>
+                                </resource>
+                                <resource>
+                                    <directory>${bungee.project.parent}/module/cmd-list/target/</directory>
+                                    <includes>
+                                        <include>cmd*.jar</include>
                                     </includes>
                                 </resource>
                             </resources>
@@ -159,6 +167,28 @@
                     </arguments>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <descriptorRefs>
+                        <descriptorRef>jar-with-dependencies</descriptorRef>
+                    </descriptorRefs>
+                    <outputDirectory>${project.build.directory}/plugins/</outputDirectory>
+                    <finalName>${project.build.finalName}</finalName>
+                    <appendAssemblyId>false</appendAssemblyId>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
@@ -189,5 +219,11 @@
             <version>1.16.16</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk-ec2</artifactId>
+            <version>1.11.296</version>
+        </dependency>
+
     </dependencies>
 </project>
